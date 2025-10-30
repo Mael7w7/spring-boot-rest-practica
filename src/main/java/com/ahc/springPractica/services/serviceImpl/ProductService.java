@@ -1,12 +1,11 @@
-package com.ahc.springPractica.service.serviceimpl;
+package com.ahc.springPractica.services.serviceImpl;
 
-import com.ahc.springPractica.entites.Category;
-import com.ahc.springPractica.entites.Product;
+import com.ahc.springPractica.entities.Product;
 import com.ahc.springPractica.repositories.ProductRepository;
-import com.ahc.springPractica.service.serviceI.IServiceProduct;
+import com.ahc.springPractica.services.iservice.IServiceProduct;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,19 +13,20 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 @Data
-
-
+@Builder
 public class ProductService implements IServiceProduct {
     private final ProductRepository productRepository;
 
+
+
     @Override
-    public List<Product> getListProduct() {
+    public List<Product> lisProducts() {
         return productRepository.findAll();
     }
 
     @Override
-    public List<Product> getProduct(Long idCategory) {
-        return productRepository.findByCategoryId(idCategory);
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -35,14 +35,13 @@ public class ProductService implements IServiceProduct {
     }
 
     @Override
-    public Product updateProduct(Long id ,Product product) {
+    public Product updateProduct(Long id, Product product) {
         product.setId(id);
-        return  productRepository.save(product);
-
+        return productRepository.save(product);
     }
 
     @Override
     public void deleteProduct(Long id) {
-         productRepository.deleteById(id);
+       productRepository.deleteById(id);
     }
 }

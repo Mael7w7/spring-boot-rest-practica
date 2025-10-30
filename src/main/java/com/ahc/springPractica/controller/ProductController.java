@@ -1,43 +1,11 @@
 package com.ahc.springPractica.controller;
 
-import com.ahc.springPractica.entites.Category;
-import com.ahc.springPractica.entites.Product;
-import com.ahc.springPractica.service.serviceI.IServiceProduct;
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/products")
-@AllArgsConstructor
+@RequestMapping("/product")
 public class ProductController {
-    private final IServiceProduct serviceProduct;
 
-    @GetMapping
-    public List<Product> getProducts() {
-        return serviceProduct.getListProduct();
-    }
-
-    @GetMapping("/category/{categoryid}")
-    public List<Product> getCategoryById(@PathVariable Long categoryid) {
-        return serviceProduct.getProduct(categoryid);
-    }
-
-    @PostMapping
-    public Product saveProduct(@RequestBody Product product) {
-        return serviceProduct.createProduct(product);
-    }
-
-    @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
-        return serviceProduct.updateProduct(id, product);
-    }
-
-
-    @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id) {
-        serviceProduct.deleteProduct(id);
-    }
 
 }

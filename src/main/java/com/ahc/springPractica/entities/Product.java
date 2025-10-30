@@ -1,6 +1,5 @@
-package com.ahc.springPractica.entites;
+package com.ahc.springPractica.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,14 +7,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name="product")
+@Table(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +25,8 @@ public class Product {
     private BigDecimal price;
     private Integer stock;
 
-    //Relation de
-    @ManyToOne
-    @JoinColumn(name = "id_category")
-    @JsonBackReference
-    private Category category;
-
+    @OneToMany(mappedBy = "product",orphanRemoval=true,cascade = CascadeType.ALL)
+    private List<Order> orders=new ArrayList<>();
 
 
 }
