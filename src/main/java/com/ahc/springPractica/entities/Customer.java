@@ -1,5 +1,6 @@
 package com.ahc.springPractica.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +32,7 @@ public class Customer {
 
 
     @OneToMany(mappedBy = "customer",orphanRemoval=true,cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Order> orders=new ArrayList<>();
 
 }

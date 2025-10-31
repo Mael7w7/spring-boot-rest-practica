@@ -1,5 +1,6 @@
 package com.ahc.springPractica.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -25,12 +26,19 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name="id_customer")
+    @JsonBackReference
     private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name="id_product")
-    private Product product;
 
-
-
+    @ManyToMany
+    @JoinTable(
+            name = "order_products",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products;
 }
+
+
+
+

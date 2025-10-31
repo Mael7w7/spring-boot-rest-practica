@@ -1,5 +1,6 @@
 package com.ahc.springPractica.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,8 +26,9 @@ public class Product {
     private BigDecimal price;
     private Integer stock;
 
-    @OneToMany(mappedBy = "product",orphanRemoval=true,cascade = CascadeType.ALL)
-    private List<Order> orders=new ArrayList<>();
+
+    @ManyToMany(mappedBy = "products")
+    private List<Order> orders;
 
 
 }

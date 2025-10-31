@@ -52,7 +52,7 @@ public class OrderService implements IServiceOrder {
 
     @Override
     public List<Order> listProductByOrderId(Long productId) {
-        return orderRespository.findByProductId(productId);
+        return orderRespository.findByProducts_Id(productId);
     }
 
 }

@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface OrderRespository extends JpaRepository<Order, Long> {
     List<Order> findByCustomerId(Long customerId);
-    List<Order> findByProductId(Long productId);
+    List<Order> findByProducts_Id(Long productId);
 
 }
